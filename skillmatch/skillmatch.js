@@ -244,7 +244,9 @@ async function main() {
 		compatibility.report();
 		console.log(`-------------------------------------`);
 		console.log(
-			`Your best match is: ${bestJob.role} at ${bestJob.company}`,
+			`Your best match is: ${bestJob.role} at ${bestJob.company} where you fit ${candidate.getMatchPercentage(
+				bestJob,
+			)}% of the requirements.`,
 		);
 		console.log(`-------------------------------------`);
 	} catch (error) {
