@@ -6,7 +6,7 @@ class Person {
 
 	introduce() {
 		console.log(
-			`Candidate data: \n Name: ${this.name} \n Age: ${this.age}`,
+			`Candidate data: \nName: ${this.name} \nAge: ${this.age}`,
 		);
 	}
 }
@@ -17,6 +17,10 @@ class Candidate extends Person {
 		this.experience = experience;
 		this.skills = skills;
 		this.areaOfInterest = areaOfInterest;
+	}
+
+	reportSkills() {
+		console.log(`Skills: ${this.skills.join(", ")}`);
 	}
 
 	getMissingSkills(job) {
@@ -227,9 +231,11 @@ async function main() {
 		let count = offerCount();
 		let bestJob = candidate.perfectMatch(jobs);
 		candidate.introduce();
+		candidate.reportSkills();
+		// console.log(candidate.skills.join(", "));
 		let companyNames = jobs.map((job) => job.company);
 		console.log(`-------------------------------------`);
-		console.log(`Empresas analisadas: ${companyNames.join(", ")}`);
+		console.log(`Analysed companiess: ${companyNames.join(", ")}`);
 		jobs.forEach((job) => {
 			job.getSummary();
 			count.sum();
