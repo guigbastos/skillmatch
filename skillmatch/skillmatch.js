@@ -227,11 +227,15 @@ async function main() {
 		let count = offerCount();
 		let bestJob = candidate.perfectMatch(jobs);
 		candidate.introduce();
+		let companyNames = jobs.map((job) => job.company);
+		console.log(`-------------------------------------`);
+		console.log(`Empresas analisadas: ${companyNames.join(", ")}`);
 		jobs.forEach((job) => {
 			job.getSummary();
 			count.sum();
 			candidate.generateReport(job, console.log);
 		});
+		console.log(`-------------------------------------`);
 		console.log(`${count.totalOffer()} offers loaded.`);
 		let compatibility = countCompatibility();
 		for (let i = 0; i < jobs.length; i++) {
