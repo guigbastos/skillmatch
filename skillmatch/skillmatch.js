@@ -5,9 +5,7 @@ class Person {
 	}
 
 	introduce() {
-		console.log(
-			`Candidate data: \nName: ${this.name} \nAge: ${this.age}`,
-		);
+		console.log(`Candidate data: \nName: ${this.name} \nAge: ${this.age}`);
 	}
 }
 
@@ -208,7 +206,7 @@ function fetchJobsFromServer() {
 					]),
 				];
 				resolve(jobs);
-			}, 0);
+			}, 2000);
 		} else {
 			reject("Server is down");
 		}
@@ -232,7 +230,6 @@ async function main() {
 		let bestJob = candidate.perfectMatch(jobs);
 		candidate.introduce();
 		candidate.reportSkills();
-		// console.log(candidate.skills.join(", "));
 		let companyNames = jobs.map((job) => job.company);
 		console.log(`-------------------------------------`);
 		console.log(`Analysed companiess: ${companyNames.join(", ")}`);
