@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Skillmatch | Encontre vagas compatíveis com seu perfil</title>
+		<meta
+			name="description"
+			content="Compare seu perfil profissional com vagas de tecnologia e descubra as oportunidades mais compatíveis no SkillMatch"
+		/>
+		<link rel="stylesheet" href="./assets/styles/index.style.css" />
+	</head>
+	<body>
+		<header class="site-header">
+			<a href="#main-content" class="brand">
+				<img src="./assets/img/logo.svg" alt="Logo do SkillMatch" />
+			</a>
+
+			<nav aria-label="Navegação principal">
+				<ul>
+					<li><a href="#profile">Seu perfil</a></li>
+					<li><a href="#job-results">Vagas</a></li>
+					<li><a href="#best-match">Melhor vaga</a></li>
+					<li><a href="#recommendations">Recomendações</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="main-content">
+			<section class="hero" aria-labelledby="page-title">
+				<h1 id="page-title">
+					Encontre vagas compatíveis com o seu perfil
+				</h1>
+
+				<p>
+					Informe suas habilidades e descubra quais oportunidades
+					combinam melhor com sua experiência
+				</p>
+			</section>
+
+			<section id="profile" aria-labelledby="profile-title">
+				<h2 id="profile-title">Seu perfil profissional</h2>
+
+				<form id="candidate-profile-form">
+					<div class="form-fields">
+						<div class="form-field">
+							<label for="candidate-name">Nome</label>
+							<input
+								type="text"
+								name="candidate-name"
+								id="candidate-name"
+							/>
+						</div>
+
+						<div class="form-field">
+							<label for="candidate-area"
+								>Área profissional</label
+							>
+							<input
+								type="text"
+								name="candidate-area"
+								id="candidate-area"
+							/>
+						</div>
+
+						<div class="form-field">
+							<label for="candidate-skills">Habilidades</label>
+							<textarea
+								name="candidate-skills"
+								id="candidate-skills"
+								rows="4"
+							></textarea>
+						</div>
+
+						<div class="form-field">
+							<label for="candidate-experience"
+								>Tempo de experiência</label
+							>
+							<input
+								type="number"
+								name="candidate-experience"
+								id="candidate-experience"
+								min="0"
+							/>
+						</div>
+					</div>
+					<button type="submit">Encontrar vagas</button>
+					<p id="form-feedback"></p>
+				</form>
+			</section>
+
+			<section id="job-results" aria-labelledby="job-results-title">
+				<h2 id="job-results-title">Vagas compatíveis</h2>
+
+				<p id="results-status">
+					Preencha seu perfil para visualizar as vagas
+				</p>
+
+				<div id="job-listings"></div>
+			</section>
+
+			<section id="best-match" aria-labelledby="best-match-title">
+				<h2 id="best-match-title">Melhor correspondência</h2>
+				<div id="best-match-content"></div>
+			</section>
+
+			<section
+				id="recommendations"
+				aria-labelledby="recommendations-title"
+			>
+				<h2 id="recommendations-title">Recomendações</h2>
+				<div id="recommendations-content"></div>
+			</section>
+		</main>
+
+		<footer class="site-footer">
+			SkillMatch • SCTEC Project • Made by Guilherme Bastos
+		</footer>
+		<script src="./assets/scripts/main.js"></script>
+	</body>
+</html>
