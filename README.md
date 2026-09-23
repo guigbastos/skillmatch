@@ -11,13 +11,13 @@ O objetivo é demonstrar, de forma prática, conceitos de JavaScript estudados n
 1. Acesse a pasta do projeto:
 
 ```bash
-cd skillmatch-project
+cd skillmatch
 ```
 
 2. Execute o arquivo principal:
 
 ```bash
-node skillmatch/skillmatch.js
+node console/skillmatch-console.js
 ```
 
 3. O programa irá exibir no console o perfil do candidato, as vagas carregadas, os percentuais de compatibilidade, as habilidades faltantes e a melhor vaga encontrada.
