@@ -19,7 +19,46 @@
     <main id="main-content" class="page-container">
         <section>
             <h2 id="profile-title">Seu perfil</h2>
-            <form id="profile-form" class="profile-form"></form>
+            <form id="profile-form" class="profile-form">
+                <div>
+                    <label for="candidate-name">Nome</label>
+                    <input type="text" id="candidate-name" name="name" required>
+                    <span id="name-error"></span>
+                </div>
+                <div>
+                    <label for="area-of-interest">Área de interesse</label>
+                    <select name="areaOfInterest" id="area-of-interest" required>
+                        <option value="">Selecione uma área</option>
+                        <option value="front-end">Front-end</option>
+                        <option value="back-end">Back-end</option>
+                        <option value="full-stack">Full Stack</option>
+                    </select>
+                    <span id="area-error"></span>
+                </div>
+                <fieldset id="skills-group">
+                    <h3>habilidades</h3>
+                    <p id="skills-help">Selecione pelo menos uma habilidade que você possui.</p>
+                    <div>
+                        <label for="skill-html"><input id="skill-html" type="checkbox" name="skills" value="html">HTML</label>
+                        <label for="skill-css"><input id="skill-css" type="checkbox" name="skills" value="css">CSS</label>
+                        <label for="skill-javascript"><input id="skill-javascript" type="checkbox" name="skills" value="javascript">JavaScript</label>
+                        <label for="skill-accessibility"><input id="skill-accessibility" type="checkbox" name="skills" value="accessibility">Acessibilidade</label>
+                        <label for="skill-nodejs"><input id="skill-nodejs" type="checkbox" name="skills" value="nodejs">Node.js</label>
+                        <label for="skill-sql"><input id="skill-sql" type="checkbox" name="skills" value="sql">SQL</label>
+                        <label for="skill-rest-api"><input id="skill-rest-api" type="checkbox" name="skills" value="rest-api">APIs REST</label>
+                    </div>
+                    <span id="skills-error"></span>
+                </fieldset>
+                <div>
+                    <label for="experience-months">Experiência em meses</label>
+                    <input type="number" id="experience-months" name="experienceMonths" min="0" step="1" required>
+                    <p id="experience-help">Informe 0 se ainda não tiver experiência.</p>
+                    <span id="experience-error"></span>
+                </div>
+                <div>
+                    <button id="analyse-button" type="submit" disabled>Analisar compatibilidade</button>
+                </div>
+            </form>
         </section>
 
         <p id="page-status"></p>
