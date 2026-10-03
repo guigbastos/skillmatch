@@ -1,3 +1,5 @@
+const jobAreas = ["front-end", "back-end", "full-stack"]
+
 const seniorityLabels = {
 	junior: "Junior",
 	"mid-level": "Pleno",
@@ -176,35 +178,133 @@ export const buildStudyRecommendation = (results) => {
 };
 
 export const analyseJobs = (candidate, jobs, onComplete) => {
-    if (!Array.isArray(jobs)) {
-        return { status: "invalid-catalog", message: "O catálogo precisa ser uma lista de vagas."}
-    }
+	if (!Array.isArray(jobs)) {
+		return {
+			status: "invalid-catalog",
+			message: "O catálogo precisa ser uma lista de vagas.",
+		};
+	}
 
-    if (jobs.length === 0) {
-        return { status: "empty-catalog", message: "Não há vagas disponíveis para analisar."}
-    }
+	if (jobs.length === 0) {
+		return {
+			status: "empty-catalog",
+			message: "Não há vagas disponíveis para analisar.",
+		};
+	}
 
-    if (typeof onComplete !== "function") {
-        return { status: "invalid-callback", message: "Informe uma função para receber a análise."}
-    }
+	if (typeof onComplete !== "function") {
+		return {
+			status: "invalid-callback",
+			message: "Informe uma função para receber a análise.",
+		};
+	}
 
-    const matchingJobs = jobs.filter((job) => job.area === candidate.areaOfInterest)
-    const results = matchingJobs.map((job) => job.analyse(candidate))
-    const bestMatch = findBestMatch(results)
-    const recommendations = buildStudyRecommendation(results)
-    const status = results.length === 0 ? "no-area-jobs" : "success"
+	const matchingJobs = jobs.filter(
+		(job) => job.area === candidate.areaOfInterest,
+	);
+	const results = matchingJobs.map((job) => job.analyse(candidate));
+	const bestMatch = findBestMatch(results);
+	const recommendations = buildStudyRecommendation(results);
+	const status = results.length === 0 ? "no-area-jobs" : "success";
 
-    const summary = { status, areaOfInterest: candidate.areaOfInterest, results, bestMatch, recommendations }
-    onComplete(summary)
+	const summary = {
+		status,
+		areaOfInterest: candidate.areaOfInterest,
+		results,
+		bestMatch,
+		recommendations,
+	};
+	onComplete(summary);
 
-    return summary
-}
+	return summary;
+};
 
 export const createAnalysisCounter = () => {
-    let count = 0;
+	let count = 0;
 
-    return function nextCount() {
-        count += 1
-        return count
-    }
-}
+	return function nextCount() {
+		count += 1;
+		return count;
+	};
+};
+
+const availableSkills = [
+	"html",
+	"css",
+	"javascript",
+	"typescript",
+	"java",
+	"python",
+	"tailwind",
+	"vue",
+	"nodejs",
+	"nextjs",
+	"php",
+	"c-sharp",
+	"rest-api",
+];
+
+export const validateCandidate = (rawCandidate) => {
+	const errors = {};
+	const source =
+		rawCandidate !== null && typeof rawCandidate === "object"
+			? rawCandidate
+			: {};
+
+	const name = typeof source.name === "string" ? source.name.trim() : "";
+	const areaOfInterest = source.areaOfInterest;
+	const rawSkills = source.skills;
+
+	let skills = [];
+
+	try {
+		skills = normalizeSkills(rawSkills);
+
+		if (skills.length === 0) {
+			errors.skills = "Selecione pelo menos uma habilidade.";
+		} else if (!skills.every((skill) => availableSkills.includes(skill))) {
+			errors.skills =
+				"Selecione apenas as habilidades disponíveis no formulário.";
+		}
+	} catch (error) {
+		errors.skills = error.message;
+	}
+
+	const rawExperience = source.experienceYears;
+	const hasExperienceValue =
+		typeof rawExperience === "number" ||
+		(typeof rawExperience === "string" && rawExperience.trim() !== "");
+	const experienceYears = hasExperienceValue ? Number(rawExperience) : null;
+
+	if (name === "") {
+		errors.name = "Informe seu nome.";
+	}
+
+	if (!jobAreas.includes(areaOfInterest)) {
+		errors.areaOfInterest = "Selecione sua área de interesse.";
+	}
+
+	if (
+		experienceYears === null ||
+		experienceYears % 1 !== 0 ||
+		experienceYears < 0 ||
+		experienceYears > 50
+	) {
+		errors.experienceYears =
+			"Informe um valor de 0 a 50 anos de experiência profissional.";
+	}
+
+	const isValid =
+		errors.name === undefined &&
+		errors.areaOfInterest === undefined &&
+		errors.skills === undefined &&
+		errors.experienceYears === undefined;
+
+	return {
+		isValid,
+		errors,
+		candidate: isValid
+			? { name, areaOfInterest, skills, experienceYears }
+			: null,
+	};
+};
