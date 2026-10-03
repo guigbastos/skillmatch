@@ -38,16 +38,16 @@ const validateJobRecord = (record) => {
 
 	const requirements = normalizeSkills(record.requirements);
 	if (requirements.length === 0) {
-        throw new Error("Cada vaga deve ter pelo menos um requisito válido.");
+		throw new Error("Cada vaga deve ter pelo menos um requisito válido.");
 	}
-    
+
 	return requirements;
 };
 
 export class Job {
-    constructor(record) {
-        const requirements = validateJobRecord(record);
-        
+	constructor(record) {
+		const requirements = validateJobRecord(record);
+
 		this.id = record.id;
 		this.company = record.company.trim();
 		this.role = record.role.trim();
@@ -59,29 +59,29 @@ export class Job {
 		this.seniority = record.seniority;
 		this.seniorityLabel = seniorityLabels[record.seniority];
 	}
-    
+
 	getDisplayTitle() {
-        return `${this.role} — ${this.seniorityLabel}`;
+		return `${this.role} — ${this.seniorityLabel}`;
 	}
-    analyse(candidate) {
-        const candidateSkills = normalizeSkills(candidate.skills);
-        const matchedSkills = this.requirements.filter((skill) =>
-            candidateSkills.includes(skill),
-        );
-        const missingSkills = this.requirements.filter(
-            (skill) => !candidateSkills.includes(skill),
-        );
-        const percentage =
-            (matchedSkills.length * 100) / this.requirements.length;
-    
-        return {
-            job: this,
-            percentage,
-            matchedSkills,
-            missingSkills,
-            classification: classifyCompatibility(percentage),
-        };
-    }
+	analyse(candidate) {
+		const candidateSkills = normalizeSkills(candidate.skills);
+		const matchedSkills = this.requirements.filter((skill) =>
+			candidateSkills.includes(skill),
+		);
+		const missingSkills = this.requirements.filter(
+			(skill) => !candidateSkills.includes(skill),
+		);
+		const percentage =
+			(matchedSkills.length * 100) / this.requirements.length;
+
+		return {
+			job: this,
+			percentage,
+			matchedSkills,
+			missingSkills,
+			classification: classifyCompatibility(percentage),
+		};
+	}
 }
 
 export class FrontEndJob extends Job {
@@ -93,7 +93,6 @@ export class FrontEndJob extends Job {
 	getDisplayTitle() {
 		return `${super.getDisplayTitle()} · ${this.areaLabel}`;
 	}
-
 }
 
 export const createJobs = (records) => {
@@ -141,33 +140,71 @@ export const classifyCompatibility = (percentage) => {
 	}
 };
 
-export const findBestMatch = (result) => result.reduce((best, current) => {
-    if (best === null || current.percentage > best.percentage) {
-        return current
-    }
+export const findBestMatch = (result) =>
+	result.reduce((best, current) => {
+		if (best === null || current.percentage > best.percentage) {
+			return current;
+		}
 
-    const isTie = current.percentage === best.percentage;
-    if (isTie && current.job.id < best.job.id) {
-        return current
-    }
+		const isTie = current.percentage === best.percentage;
+		if (isTie && current.job.id < best.job.id) {
+			return current;
+		}
 
-    return best;
-}, null)
+		return best;
+	}, null);
 
 export const buildStudyRecommendation = (results) => {
-    const frequencies = []
+	const frequencies = [];
 
-    for (const result of results) {
-        for (const skill of result.missingSkills) {
-            const existing = frequencies.find((item) => item.skill === skill)
-            if (existing) {
-                existing.count += 1
-            } else {
-                frequencies.push({ skill, count: 1 })
-            }
-        }
+	for (const result of results) {
+		for (const skill of result.missingSkills) {
+			const existing = frequencies.find((item) => item.skill === skill);
+			if (existing) {
+				existing.count += 1;
+			} else {
+				frequencies.push({ skill, count: 1 });
+			}
+		}
+	}
+	const highestCount = frequencies.reduce(
+		(highest, item) => Math.max(highest, item.count),
+		0,
+	);
+
+	return frequencies.filter((item) => item.count === highestCount);
+};
+
+export const analyseJobs = (candidate, jobs, onComplete) => {
+    if (!Array.isArray(jobs)) {
+        return { status: "invalid-catalog", message: "O catálogo precisa ser uma lista de vagas."}
     }
-    const highestCount = frequencies.reduce((highest, item) => Math.max(highest, item.count), 0)
 
-    return frequencies.filter((item) => item.count === highestCount)
+    if (jobs.length === 0) {
+        return { status: "empty-catalog", message: "Não há vagas disponíveis para analisar."}
+    }
+
+    if (typeof onComplete !== "function") {
+        return { status: "invalid-callback", message: "Informe uma função para receber a análise."}
+    }
+
+    const matchingJobs = jobs.filter((job) => job.area === candidate.areaOfInterest)
+    const results = matchingJobs.map((job) => job.analyse(candidate))
+    const bestMatch = findBestMatch(results)
+    const recommendations = buildStudyRecommendation(results)
+    const status = results.length === 0 ? "no-area-jobs" : "success"
+
+    const summary = { status, areaOfInterest: candidate.areaOfInterest, results, bestMatch, recommendations }
+    onComplete(summary)
+
+    return summary
+}
+
+export const createAnalysisCounter = () => {
+    let count = 0;
+
+    return function nextCount() {
+        count += 1
+        return count
+    }
 }
