@@ -140,3 +140,34 @@ export const classifyCompatibility = (percentage) => {
 		return "Baixa";
 	}
 };
+
+export const findBestMatch = (result) => result.reduce((best, current) => {
+    if (best === null || current.percentage > best.percentage) {
+        return current
+    }
+
+    const isTie = current.percentage === best.percentage;
+    if (isTie && current.job.id < best.job.id) {
+        return current
+    }
+
+    return best;
+}, null)
+
+export const buildStudyRecommendation = (results) => {
+    const frequencies = []
+
+    for (const result of results) {
+        for (const skill of result.missingSkills) {
+            const existing = frequencies.find((item) => item.skill === skill)
+            if (existing) {
+                existing.count += 1
+            } else {
+                frequencies.push({ skill, count: 1 })
+            }
+        }
+    }
+    const highestCount = frequencies.reduce((highest, item) => Math.max(highest, item.count), 0)
+
+    return frequencies.filter((item) => item.count === highestCount)
+}
