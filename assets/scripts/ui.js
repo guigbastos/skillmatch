@@ -33,15 +33,98 @@ export const onProfileSubmit = (handler) => {
 			name: document.getElementById("candidate-name").value,
 			areaOfInterest: document.getElementById("area-of-interest").value,
 			skills,
-			experienceYears: document.getElementById("experience-years").value,
+			experienceBySkill: readSkillExperienceFields(),
 		};
 
-		handler(rawCandidate)
+		handler(rawCandidate);
 	});
 };
 
 export const onProfileEdit = (handler) => {
-	const form = document.getElementById("profile-form")
+	const form = document.getElementById("profile-form");
 
-	form.addEventListener("input", () => handler())
-}
+	form.addEventListener("input", () => handler());
+};
+
+const skillLabels = {
+	html: "HTML",
+	css: "CSS",
+	javascript: "JavaScript",
+	typescript: "TypeScript",
+	java: "Java",
+	python: "Python",
+	tailwind: "Tailwind",
+	vue: "Vue.js",
+	nodejs: "Node.js",
+	nextjs: "Next.js",
+	php: "PHP",
+	"c-sharp": "C#",
+	"rest-api": "APIs REST",
+};
+
+export const renderSkillExperienceFields = (skills, previousValues = {}) => {
+	const container = document.getElementById("skill-experience-fields");
+	let fieldsHTML = "";
+
+	skills.forEach((skill) => {
+		const inputId = `experience-${skill}-years`;
+
+		fieldsHTML += `
+			<div class="field">
+        	  <label class="skill-experience-label" for="${inputId}">${skillLabels[skill]} (anos de experiência)</label>
+				<input
+				id="${inputId}"
+				name="${skill}"
+				type="number"
+				min="0"
+				max="50"
+				step="1"
+				required
+				class="form-control"
+				>
+				<span id="skill-experience-error-${skill}" class="field-error skill-experience-error"></span>
+			</div>
+		`;
+	});
+
+	container.innerHTML = fieldsHTML;
+
+	skills.forEach((skill) => {
+		const input = document.getElementById(`experience-${skill}-years`);
+		if (previousValues[skill] !== undefined) {
+			input.value = previousValues[skill];
+		}
+	});
+};
+
+export const readSelectedSkills = () => {
+	const selectedSkills = [];
+	const skillsOptions = document.getElementById("skills-options");
+	const checkboxes = skillsOptions.querySelectorAll("input");
+
+	checkboxes.forEach((checkbox) => {
+		if (checkbox.checked) {
+			selectedSkills.push(checkbox.value);
+		}
+	});
+
+	return selectedSkills;
+};
+
+export const readSkillExperienceFields = () => {
+	const experienceBySkill = {};
+	const container = document.getElementById("skill-experience-fields");
+	const inputs = container.querySelectorAll("input");
+
+	inputs.forEach((input) => {
+		experienceBySkill[input.name] = input.value;
+	});
+
+	return experienceBySkill;
+};
+
+export const onSkillsChange = (handler) => {
+	document
+		.getElementById("skills-options")
+		.addEventListener("change", handler);
+};

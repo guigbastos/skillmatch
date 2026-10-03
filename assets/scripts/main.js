@@ -1,6 +1,20 @@
 import { createJobs } from "./engine.js";
 import { loadJobs } from "./data.js";
-import { showStatus, setCatalogState, onRetry } from "./ui.js";
+import {
+	showStatus,
+	setCatalogState,
+	onRetry,
+	onSkillsChange,
+	readSelectedSkills,
+	readSkillExperienceFields,
+	renderSkillExperienceFields,
+} from "./ui.js";
+
+function updateSkillExperienceFields() {
+	const previousValues = readSkillExperienceFields();
+	const selectedSkills = readSelectedSkills();
+	renderSkillExperienceFields(selectedSkills, previousValues);
+}
 
 let isLoading = false;
 
@@ -53,3 +67,5 @@ async function refreshCatalog() {
 
 onRetry(refreshCatalog);
 refreshCatalog();
+onSkillsChange(updateSkillExperienceFields);
+updateSkillExperienceFields();
