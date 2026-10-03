@@ -1,4 +1,4 @@
-const jobAreas = ["front-end", "back-end", "full-stack"]
+const jobAreas = ["front-end", "back-end", "full-stack"];
 
 const seniorityLabels = {
 	junior: "Junior",
@@ -270,12 +270,6 @@ export const validateCandidate = (rawCandidate) => {
 		errors.skills = error.message;
 	}
 
-	const rawExperience = source.experienceYears;
-	const hasExperienceValue =
-		typeof rawExperience === "number" ||
-		(typeof rawExperience === "string" && rawExperience.trim() !== "");
-	const experienceYears = hasExperienceValue ? Number(rawExperience) : null;
-
 	if (name === "") {
 		errors.name = "Informe seu nome.";
 	}
@@ -284,27 +278,52 @@ export const validateCandidate = (rawCandidate) => {
 		errors.areaOfInterest = "Selecione sua área de interesse.";
 	}
 
-	if (
-		experienceYears === null ||
-		experienceYears % 1 !== 0 ||
-		experienceYears < 0 ||
-		experienceYears > 50
-	) {
-		errors.experienceYears =
-			"Informe um valor de 0 a 50 anos de experiência profissional.";
-	}
+	const experienceBySkill = {};
+	const rawExperienceBySkill = source.experienceBySkill;
+	const hasExperienceMap =
+		rawExperienceBySkill !== null &&
+		typeof rawExperienceBySkill === "object" &&
+		!Array.isArray(rawExperienceBySkill);
+
+	skills.forEach((skill) => {
+		const rawYears = hasExperienceMap
+			? rawExperienceBySkill[skill]
+			: undefined;
+		const hasNumber = typeof rawYears === "number";
+		const hasText = typeof rawYears === "string" && rawYears.trim() !== "";
+		const years = Number(rawYears);
+		const hasInteger = (hasNumber || hasText) && years % 1 === 0;
+
+		let errorMessage = "";
+
+		if (!hasInteger) {
+			errorMessage = "Informe anos completos ou digite 0 se ainda não tem experiência profissional nesta tecnologia."
+		} else if (years < 0) {
+			errorMessage = "Informe um valor igual ou maior que 0."
+		} else if(years > 50) {
+			errorMessage = "Informe até 50 anos de experiência profissional nesta tecnologia."
+		}
+
+		if (errorMessage !== "") {
+			if(!errors.experienceBySkill) {
+				errors.experienceBySkill = {}
+			} errors.experienceBySkill[skill] = errorMessage
+		} else {
+			experienceBySkill[skill] = years
+		}
+	});
 
 	const isValid =
 		errors.name === undefined &&
 		errors.areaOfInterest === undefined &&
 		errors.skills === undefined &&
-		errors.experienceYears === undefined;
+		errors.experienceBySkill === undefined;
 
 	return {
 		isValid,
 		errors,
 		candidate: isValid
-			? { name, areaOfInterest, skills, experienceYears }
+			? { name, areaOfInterest, skills, experienceBySkill }
 			: null,
 	};
 };

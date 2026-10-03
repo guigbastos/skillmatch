@@ -149,3 +149,20 @@ button:disabled {
     justify-content: center;
     padding: 24px 16px;
 }
+
+.skill-experience-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.skill-experience-guidance, .skill-experience-label {
+    color: #657187;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.skill-experience-label {
+    font-weight: 500;
+}
