@@ -1,0 +1,237 @@
+[
+  {
+    "id": 1,
+    "company": "WebCrafters",
+    "role": "Desenvolvedor(a) de Interfaces",
+    "description": "Implementa ajustes em telas existentes, corrige defeitos simples e participa de revisões com apoio da equipe.",
+    "area": "front-end",
+    "requirements": [
+      "html",
+      "css",
+      "javascript",
+      "typescript"
+    ],
+    "salary": 6200,
+    "workMode": "remote",
+    "seniority": "junior"
+  },
+  {
+    "id": 2,
+    "company": "Frontend Pros",
+    "role": "Desenvolvedor(a) de Interfaces Web",
+    "description": "Constrói telas responsivas a partir de layouts definidos e ajusta comportamentos com orientação de pessoas experientes.",
+    "area": "front-end",
+    "requirements": [
+      "html",
+      "css",
+      "javascript"
+    ],
+    "salary": 6850,
+    "workMode": "hybrid",
+    "seniority": "junior"
+  },
+  {
+    "id": 3,
+    "company": "BrightLeaf Digital",
+    "role": "Desenvolvedor(a) de Interfaces",
+    "description": "Conduz componentes de interface com Tailwind, mantendo responsividade e integrando APIs documentadas com autonomia.",
+    "area": "front-end",
+    "requirements": [
+      "html",
+      "css",
+      "javascript",
+      "tailwind"
+    ],
+    "salary": 11200,
+    "workMode": "remote",
+    "seniority": "mid-level"
+  },
+  {
+    "id": 4,
+    "company": "Pixel Harbor",
+    "role": "Desenvolvedor(a) de Interfaces Vue",
+    "description": "Implementa e mantém componentes Vue, investiga problemas de interface e participa das decisões de implementação.",
+    "area": "front-end",
+    "requirements": [
+      "html",
+      "css",
+      "javascript",
+      "vue"
+    ],
+    "salary": 14500,
+    "workMode": "hybrid",
+    "seniority": "mid-level"
+  },
+  {
+    "id": 5,
+    "company": "Nuvem Criativa",
+    "role": "Engenheiro(a) de Interfaces Web",
+    "description": "Define a estrutura de aplicações Next.js, orienta decisões de desempenho e revisa padrões de interface entre equipes.",
+    "area": "front-end",
+    "requirements": [
+      "html",
+      "css",
+      "javascript",
+      "nextjs"
+    ],
+    "salary": 16800,
+    "workMode": "onsite",
+    "seniority": "senior"
+  },
+  {
+    "id": 6,
+    "company": "TechCorp Inc.",
+    "role": "Desenvolvedor(a) Back-End Java",
+    "description": "Implementa endpoints Java de menor complexidade e corrige validações seguindo padrões revisados pela equipe.",
+    "area": "back-end",
+    "requirements": [
+      "java",
+      "rest-api"
+    ],
+    "salary": 6400,
+    "workMode": "hybrid",
+    "seniority": "junior"
+  },
+  {
+    "id": 7,
+    "company": "Global Solutions",
+    "role": "Desenvolvedor(a) Back-End Node.js",
+    "description": "Mantém rotas Node.js, integra APIs REST e resolve tarefas delimitadas com acompanhamento do time.",
+    "area": "back-end",
+    "requirements": [
+      "javascript",
+      "nodejs",
+      "rest-api"
+    ],
+    "salary": 8200,
+    "workMode": "remote",
+    "seniority": "junior"
+  },
+  {
+    "id": 8,
+    "company": "Innovate Labs",
+    "role": "Desenvolvedor(a) Back-End Python",
+    "description": "Desenha contratos de API em Python, conduz funcionalidades de serviço e melhora testes e validações com autonomia.",
+    "area": "back-end",
+    "requirements": [
+      "python",
+      "rest-api"
+    ],
+    "salary": 11800,
+    "workMode": "hybrid",
+    "seniority": "mid-level"
+  },
+  {
+    "id": 9,
+    "company": "DataMinds",
+    "role": "Desenvolvedor(a) Back-End PHP",
+    "description": "Define a organização de serviços PHP, revisa contratos REST e orienta melhorias de confiabilidade.",
+    "area": "back-end",
+    "requirements": [
+      "php",
+      "javascript",
+      "rest-api"
+    ],
+    "salary": 15500,
+    "workMode": "onsite",
+    "seniority": "senior"
+  },
+  {
+    "id": 10,
+    "company": "Enterprise Solutions",
+    "role": "Desenvolvedor(a) Back-End C#",
+    "description": "Lidera a evolução de serviços C#, avalia decisões técnicas e apoia revisões e mentoria de colegas.",
+    "area": "back-end",
+    "requirements": [
+      "c-sharp",
+      "rest-api"
+    ],
+    "salary": 19000,
+    "workMode": "hybrid",
+    "seniority": "senior"
+  },
+  {
+    "id": 11,
+    "company": "GreenPixel Tecnologia",
+    "role": "Desenvolvedor(a) Full Stack",
+    "description": "Implementa funcionalidades pequenas de ponta a ponta em páginas e serviços Node.js, com tarefas e revisões frequentes.",
+    "area": "full-stack",
+    "requirements": [
+      "html",
+      "css",
+      "javascript",
+      "nodejs"
+    ],
+    "salary": 7200,
+    "workMode": "remote",
+    "seniority": "junior"
+  },
+  {
+    "id": 12,
+    "company": "Product Studio",
+    "role": "Desenvolvedor(a) Full Stack",
+    "description": "Entrega funcionalidades que conectam interfaces a serviços Python e organiza integrações entre camadas com autonomia.",
+    "area": "full-stack",
+    "requirements": [
+      "html",
+      "css",
+      "javascript",
+      "python",
+      "rest-api"
+    ],
+    "salary": 11900,
+    "workMode": "hybrid",
+    "seniority": "mid-level"
+  },
+  {
+    "id": 13,
+    "company": "Aurora Labs",
+    "role": "Desenvolvedor(a) Full Stack PHP",
+    "description": "Conduz entregas independentes em fluxos PHP de ponta a ponta e revisa soluções com a equipe de produto.",
+    "area": "full-stack",
+    "requirements": [
+      "html",
+      "css",
+      "javascript",
+      "php",
+      "rest-api"
+    ],
+    "salary": 14500,
+    "workMode": "remote",
+    "seniority": "mid-level"
+  },
+  {
+    "id": 14,
+    "company": "BluePeak Digital",
+    "role": "Desenvolvedor(a) Full Stack Java",
+    "description": "Define decisões técnicas entre interface e serviços Java, avalia impactos de manutenção e revisa implementações.",
+    "area": "full-stack",
+    "requirements": [
+      "html",
+      "css",
+      "javascript",
+      "java",
+      "rest-api"
+    ],
+    "salary": 17000,
+    "workMode": "onsite",
+    "seniority": "senior"
+  },
+  {
+    "id": 15,
+    "company": "Voltaleve Sistemas",
+    "role": "Desenvolvedor(a) Full Stack C#",
+    "description": "Conduz a arquitetura de funcionalidades full-stack em C#, orienta integrações e apoia padrões técnicos do produto.",
+    "area": "full-stack",
+    "requirements": [
+      "html",
+      "css",
+      "javascript",
+      "c-sharp",
+      "rest-api"
+    ],
+    "salary": 19800,
+    "workMode": "hybrid",
+    "seniority": "senior"
+  }
+]
