@@ -128,3 +128,42 @@ export const onSkillsChange = (handler) => {
 		.getElementById("skills-options")
 		.addEventListener("change", handler);
 };
+
+const validationsFields = [
+	{
+		key: "name", errorId: "name-error"
+	},
+	{
+		key: "areaOfInterest", errorId: "area-error"
+	},
+	{
+		key: "skills", errorId: "skills-error"
+	},
+]
+
+export const showValidationErrors = (errors = {}) => {
+	validationsFields.forEach(({ key, errorId}) => {
+		document.getElementById(errorId).textContent = errors[key] ?? ""
+	})
+
+	const experienceContainer = document.getElementById("skill-experience-fields")
+	const experienceInputs = experienceContainer.querySelectorAll("input")
+
+	experienceInputs.forEach((input) => {
+		const skill = input.name;
+		let message = ""
+
+		if (errors.experienceBySkill && errors.experienceBySkill[skill]) {
+			message = errors.experienceBySkill[skill]
+		}
+
+		const error = document.getElementById(`skill-experience-error-${skill}`)
+		error.textContent = message
+	})
+}
+
+export const activateCustomValidation = () => {
+	const form = document.getElementById("profile-form")
+	form.noValidate = true
+	showValidationErrors()
+}
