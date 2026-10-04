@@ -62,6 +62,81 @@ const skillLabels = {
 	"rest-api": "APIs REST",
 };
 
+export const renderJobCards = (results, bestMatch) => {
+	const jobList = document.getElementById("job-list");
+	const workModeLabels = {
+		remote: "Remoto",
+		hybrid: "Híbrido",
+		onsite: "Presencial",
+	};
+
+	jobList.innerHTML = "";
+
+	results.forEach((result) => {
+		const job = result.job;
+		const card = document.createElement("article");
+		card.classList.add("job-card");
+
+		let bestMatchBadge = "";
+
+		if (bestMatch && bestMatch.job.id === job.id) {
+			card.classList.add("job-card-best");
+			bestMatchBadge =
+				'<p class="job-card-badge">Melhor compatibilidade</p>';
+		}
+
+		let matchedSkillsHTML = "";
+		result.matchedSkills.forEach((skill) => {
+			matchedSkillsHTML += `<li>${skillLabels[skill]}</li>`;
+		});
+
+		if (matchedSkillsHTML === "") {
+			matchedSkillsHTML = "<li>Nenhuma habilidade encontrada.</li>";
+		}
+
+		let missingSkillsHTML = "";
+		result.missingSkills.forEach((skill) => {
+			missingSkillsHTML += `<li>${skillLabels[skill]}</li>`;
+		});
+
+		if (missingSkillsHTML === "") {
+			missingSkillsHTML = "<li>Nenhuma habilidade faltante.</li>";
+		}
+
+		card.innerHTML = `
+      <h3 class="job-card__title"></h3>
+      ${bestMatchBadge}
+      <p class="job-card__description"></p>
+      <p class="job-card__company"></p>
+      <p class="job-card__salary"></p>
+      <p class="job-card__work-mode"></p>
+      <p class="job-card__compatibility"></p>
+      <p class="job-card__classification"></p>
+      <h4>Habilidades encontradas</h4>
+      <ul class="job-card__matched-skills">${matchedSkillsHTML}</ul>
+      <h4>Habilidades faltantes</h4>
+      <ul class="job-card__missing-skills">${missingSkillsHTML}</ul>
+    `;
+
+		card.querySelector(".job-card__title").textContent =
+			job.getDisplayTitle();
+		card.querySelector(".job-card__description").textContent =
+			job.description;
+		card.querySelector(".job-card__company").textContent =
+			`Empresa: ${job.company}`;
+		card.querySelector(".job-card__salary").textContent =
+			`Salário: R$ ${job.salary} por mês`;
+		card.querySelector(".job-card__work-mode").textContent =
+			`Modalidade: ${workModeLabels[job.workMode]}`;
+		card.querySelector(".job-card__compatibility").textContent =
+			`Compatibilidade: ${Math.floor(result.percentage)}%`;
+		card.querySelector(".job-card__classification").textContent =
+			`Classificação: ${result.classification}`;
+
+		jobList.appendChild(card);
+	});
+};
+
 export const renderSkillExperienceFields = (skills, previousValues = {}) => {
 	const container = document.getElementById("skill-experience-fields");
 	let fieldsHTML = "";
@@ -131,39 +206,46 @@ export const onSkillsChange = (handler) => {
 
 const validationsFields = [
 	{
-		key: "name", errorId: "name-error"
+		key: "name",
+		errorId: "name-error",
 	},
 	{
-		key: "areaOfInterest", errorId: "area-error"
+		key: "areaOfInterest",
+		errorId: "area-error",
 	},
 	{
-		key: "skills", errorId: "skills-error"
+		key: "skills",
+		errorId: "skills-error",
 	},
-]
+];
 
 export const showValidationErrors = (errors = {}) => {
-	validationsFields.forEach(({ key, errorId}) => {
-		document.getElementById(errorId).textContent = errors[key] ?? ""
-	})
+	validationsFields.forEach(({ key, errorId }) => {
+		document.getElementById(errorId).textContent = errors[key] ?? "";
+	});
 
-	const experienceContainer = document.getElementById("skill-experience-fields")
-	const experienceInputs = experienceContainer.querySelectorAll("input")
+	const experienceContainer = document.getElementById(
+		"skill-experience-fields",
+	);
+	const experienceInputs = experienceContainer.querySelectorAll("input");
 
 	experienceInputs.forEach((input) => {
 		const skill = input.name;
-		let message = ""
+		let message = "";
 
 		if (errors.experienceBySkill && errors.experienceBySkill[skill]) {
-			message = errors.experienceBySkill[skill]
+			message = errors.experienceBySkill[skill];
 		}
 
-		const error = document.getElementById(`skill-experience-error-${skill}`)
-		error.textContent = message
-	})
-}
+		const error = document.getElementById(
+			`skill-experience-error-${skill}`,
+		);
+		error.textContent = message;
+	});
+};
 
 export const activateCustomValidation = () => {
-	const form = document.getElementById("profile-form")
-	form.noValidate = true
-	showValidationErrors()
-}
+	const form = document.getElementById("profile-form");
+	form.noValidate = true;
+	showValidationErrors();
+};
