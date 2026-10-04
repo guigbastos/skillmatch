@@ -249,3 +249,49 @@ export const activateCustomValidation = () => {
 	form.noValidate = true;
 	showValidationErrors();
 };
+
+export const clearResults = () => {
+	document.getElementById("results-section").hidden = true;
+	document.getElementById("job-list").innerHTML = "";
+	document.getElementById("match-summary").textContent = "";
+	document.getElementById("study-recommendation").innerHTML = "";
+	document.getElementById("profile-summary").textContent = "";
+};
+
+export const renderResults = ({ results, bestMatch, recommendations }) => {
+	if (results.length === 0 || !bestMatch) {
+		clearResults();
+		return;
+	}
+
+	renderJobCards(results, bestMatch);
+
+	const bestMatchMessage = `Maior compatibilidade: ${bestMatch.job.getDisplayTitle()}, ${bestMatch.job.company}, com ${Math.floor(bestMatch.percentage)}%.`;
+
+	document.getElementById("match-summary").textContent = bestMatchMessage;
+
+	const recommendationSection = document.getElementById(
+		"study-recommendation",
+	);
+
+	if (recommendations.length === 0) {
+		recommendationSection.innerHTML = `
+			<h3>Recomendação de estudo</h3>
+			<p>Seu perfil já contempla os requisitos de todas as vagas desta área.</p>
+		`;
+	} else {
+		let recommendationItemHTML = "";
+
+		recommendations.forEach(({ skill, count }) => {
+			const jobLabel = count === 1 ? "vaga" : "vagas";
+			recommendationItemHTML += `<li>${skillLabels[skill]} <span class="recommendation-count">Exigida em ${count} ${jobLabel}</span></li>`;
+		});
+
+		recommendationSection.innerHTML = `
+		<h3>Recomendação de estudo</h3>
+		<ul>${recommendationItemHTML}</ul>
+		`;
+	}
+
+	document.getElementById("results-section").hidden = false
+};
