@@ -293,5 +293,59 @@ export const renderResults = ({ results, bestMatch, recommendations }) => {
 		`;
 	}
 
-	document.getElementById("results-section").hidden = false
+	document.getElementById("results-section").hidden = false;
 };
+
+export const fillProfileForm = (candidate) => {
+	document.getElementById("candidate-name").value = candidate.name;
+	document.getElementById("area-of-interest").value =
+		candidate.areaOfInterest;
+
+	const skillCheckboxes = document
+		.getElementById("skills-options")
+		.querySelectorAll("input");
+
+	skillCheckboxes.forEach((input) => {
+		let isSelected = false;
+
+		candidate.skills.forEach((skill) => {
+			if (skill === input.value) {
+				isSelected = true;
+			}
+		});
+		input.checked = isSelected;
+	});
+	renderSkillExperienceFields(candidate.skills, candidate.experienceBySkill);
+};
+
+export const areaLabels = {
+	"front-end": "Front-end",
+	"back-end": "Back-end",
+	"full-stack": "Full Stack",
+};
+
+export const renderProfile = (candidate) => {
+	let skillExperience = "";
+
+	candidate.skills.forEach((skill) => {
+		if (skillExperience !== "") {
+			skillExperience += ", ";
+		}
+
+		const years = candidate.experienceBySkill[skill];
+		const yearLabel = years === 1 ? "ano" : "anos";
+		skillExperience += `${skillLabels[skill]}: ${years} ${yearLabel}`;
+	});
+
+	document.getElementById("profile-summary").textContent =
+		`${candidate.name} - ${areaLabels[candidate.areaOfInterest]} - Experiência profissional por tecnologia: ${skillExperience}`;
+};
+
+export const showAnalysisCount = (count) => {
+	document.getElementById("session-count").textContent = `Análises nesta sessão: ${count}`
+}
+
+export const showStorageNotice = (message) => {
+	document.getElementById("storage-notice").textContent = message
+}
+
