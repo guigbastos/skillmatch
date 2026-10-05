@@ -19,15 +19,7 @@ export const onProfileSubmit = (handler) => {
 	form.addEventListener("submit", (event) => {
 		event.preventDefault();
 
-		const skills = [];
-		const skillsOptions = document.getElementById("skills-options");
-		const skillCheckboxes = skillsOptions.querySelectorAll("input");
-
-		skillCheckboxes.forEach((checkbox) => {
-			if (checkbox.checked) {
-				skills.push(checkbox.value);
-			}
-		});
+		const skills = readSelectedSkills()
 
 		const rawCandidate = {
 			name: document.getElementById("candidate-name").value,
@@ -130,7 +122,7 @@ export const renderJobCards = (results, bestMatch) => {
 		card.querySelector(".job-card-company").textContent =
 			`Empresa: ${job.company}`;
 		card.querySelector(".job-card-salary").textContent =
-			`Salário: R$ ${formattedSalary} por mês`;
+			`Salário: ${formattedSalary} por mês`;
 		card.querySelector(".job-card-work-mode").textContent =
 			`Modalidade: ${workModeLabels[job.workMode]}`;
 		card.querySelector(".job-card-compatibility").textContent =
