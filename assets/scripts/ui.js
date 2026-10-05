@@ -77,6 +77,11 @@ export const renderJobCards = (results, bestMatch) => {
 		const card = document.createElement("article");
 		card.classList.add("job-card");
 
+		const formattedSalary = job.salary.toLocaleString("pt-BR", {
+			style: "currency",
+			currency: "BRL",
+		});
+
 		let bestMatchBadge = "";
 
 		if (bestMatch && bestMatch.job.id === job.id) {
@@ -104,33 +109,33 @@ export const renderJobCards = (results, bestMatch) => {
 		}
 
 		card.innerHTML = `
-      <h3 class="job-card__title"></h3>
+      <h3 class="job-card-title"></h3>
       ${bestMatchBadge}
-      <p class="job-card__description"></p>
-      <p class="job-card__company"></p>
-      <p class="job-card__salary"></p>
-      <p class="job-card__work-mode"></p>
-      <p class="job-card__compatibility"></p>
-      <p class="job-card__classification"></p>
+      <p class="job-card-description"></p>
+      <p class="job-card-company"></p>
+      <p class="job-card-salary"></p>
+      <p class="job-card-work-mode"></p>
+      <p class="job-card-compatibility"></p>
+      <p class="job-card-classification"></p>
       <h4>Habilidades encontradas</h4>
-      <ul class="job-card__matched-skills">${matchedSkillsHTML}</ul>
+      <ul class="job-card-matched-skills">${matchedSkillsHTML}</ul>
       <h4>Habilidades faltantes</h4>
-      <ul class="job-card__missing-skills">${missingSkillsHTML}</ul>
+      <ul class="job-card-missing-skills">${missingSkillsHTML}</ul>
     `;
 
-		card.querySelector(".job-card__title").textContent =
+		card.querySelector(".job-card-title").textContent =
 			job.getDisplayTitle();
-		card.querySelector(".job-card__description").textContent =
+		card.querySelector(".job-card-description").textContent =
 			job.description;
-		card.querySelector(".job-card__company").textContent =
+		card.querySelector(".job-card-company").textContent =
 			`Empresa: ${job.company}`;
-		card.querySelector(".job-card__salary").textContent =
-			`Salário: R$ ${job.salary} por mês`;
-		card.querySelector(".job-card__work-mode").textContent =
+		card.querySelector(".job-card-salary").textContent =
+			`Salário: R$ ${formattedSalary} por mês`;
+		card.querySelector(".job-card-work-mode").textContent =
 			`Modalidade: ${workModeLabels[job.workMode]}`;
-		card.querySelector(".job-card__compatibility").textContent =
+		card.querySelector(".job-card-compatibility").textContent =
 			`Compatibilidade: ${Math.floor(result.percentage)}%`;
-		card.querySelector(".job-card__classification").textContent =
+		card.querySelector(".job-card-classification").textContent =
 			`Classificação: ${result.classification}`;
 
 		jobList.appendChild(card);
@@ -342,10 +347,10 @@ export const renderProfile = (candidate) => {
 };
 
 export const showAnalysisCount = (count) => {
-	document.getElementById("session-count").textContent = `Análises nesta sessão: ${count}`
-}
+	document.getElementById("session-count").textContent =
+		`Análises nesta sessão: ${count}`;
+};
 
 export const showStorageNotice = (message) => {
-	document.getElementById("storage-notice").textContent = message
-}
-
+	document.getElementById("storage-notice").textContent = message;
+};

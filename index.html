@@ -69,6 +69,7 @@
 									type="checkbox"
 									name="skills"
 									value="html"
+									class="skill-checkbox"
 								/>HTML</label
 							>
 							<label for="skill-css"
@@ -77,6 +78,7 @@
 									type="checkbox"
 									name="skills"
 									value="css"
+									class="skill-checkbox"
 								/>CSS</label
 							>
 							<label for="skill-javascript"
@@ -85,6 +87,7 @@
 									type="checkbox"
 									name="skills"
 									value="javascript"
+									class="skill-checkbox"
 								/>JavaScript</label
 							>
 							<label for="skill-typescript"
@@ -93,6 +96,7 @@
 									type="checkbox"
 									name="skills"
 									value="typescript"
+									class="skill-checkbox"
 								/>TypeScript</label
 							>
 							<label for="skill-java"
@@ -101,6 +105,7 @@
 									type="checkbox"
 									name="skills"
 									value="java"
+									class="skill-checkbox"
 								/>Java</label
 							>
 							<label for="skill-python"
@@ -109,6 +114,7 @@
 									type="checkbox"
 									name="skills"
 									value="python"
+									class="skill-checkbox"
 								/>Python</label
 							>
 							<label for="skill-tailwind"
@@ -117,6 +123,7 @@
 									type="checkbox"
 									name="skills"
 									value="tailwind"
+									class="skill-checkbox"
 								/>Tailwind</label
 							>
 							<label for="skill-vue"
@@ -125,6 +132,7 @@
 									type="checkbox"
 									name="skills"
 									value="vue"
+									class="skill-checkbox"
 								/>Vue.js</label
 							>
 							<label for="skill-nodejs"
@@ -133,6 +141,7 @@
 									type="checkbox"
 									name="skills"
 									value="nodejs"
+									class="skill-checkbox"
 								/>Node.js</label
 							>
 							<label for="skill-nextjs"
@@ -141,6 +150,7 @@
 									type="checkbox"
 									name="skills"
 									value="nextjs"
+									class="skill-checkbox"
 								/>Next.js</label
 							>
 							<label for="skill-php"
@@ -149,6 +159,7 @@
 									type="checkbox"
 									name="skills"
 									value="php"
+									class="skill-checkbox"
 								/>PHP</label
 							>
 							<label for="skill-c-sharp"
@@ -157,6 +168,7 @@
 									type="checkbox"
 									name="skills"
 									value="c-sharp"
+									class="skill-checkbox"
 								/>C#</label
 							>
 							<label for="skill-rest-api"
@@ -165,6 +177,7 @@
 									type="checkbox"
 									name="skills"
 									value="rest-api"
+									class="skill-checkbox"
 								/>APIs REST</label
 							>
 						</div>
@@ -191,9 +204,12 @@
 			</button>
 			<section id="results-section">
 				<h2 id="results-title">Sua análise</h2>
-				<p id="profile-summary"></p>
-				<p id="session-count"></p>
-				<p id="match-summary"></p>
+				<div class="candidate-summary">
+					<h3>Perfil analisado</h3>
+					<p id="profile-summary"></p>
+					<p id="match-summary"></p>
+					<p id="session-count"></p>
+				</div>
 				<div id="study-recommendation"></div>
 				<div id="job-list" class="job-list"></div>
 			</section>

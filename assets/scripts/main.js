@@ -128,7 +128,7 @@ async function refreshCatalog() {
 			jobs = catalog.jobs;
 			showStatus(
 				jobs.length
-					? "Vagas carregadas. Preencha ou revise seu perfil."
+					? `${jobs.length} vagas carregadas. Preencha ou revise seu perfil.`
 					: "O catálogo está vazio. Não há vagas cadastradas.",
 			);
 		}
