@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="description"
+			content="Compare suas habilidades com vagas para desenvolvedor"
+		/>
+		<title>SkillMatch | Descubra vagas de desenvolvedor.</title>
+		<link rel="stylesheet" href="./assets/styles/index.style.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<header class="site-header page-container">
+			<img src="./assets/img/logo.svg" alt="" />
+			<div>
+				<h1>SkillMatch</h1>
+				<p>
+					Descubra sua compatibilidade com vagas na área de
+					desenvolvimento.
+				</p>
+			</div>
+		</header>
+		<main id="main-content" class="page-container">
+			<section>
+				<h2 id="profile-title">Seu perfil</h2>
+				<form id="profile-form" class="profile-form">
+					<div class="field">
+						<label for="candidate-name">Nome</label>
+						<input
+							type="text"
+							class="form-control"
+							id="candidate-name"
+							name="name"
+							required
+						/>
+						<span id="name-error" class="field-error"></span>
+					</div>
+					<div class="field">
+						<label for="area-of-interest">Área de interesse</label>
+						<select
+							name="areaOfInterest"
+							class="form-control"
+							id="area-of-interest"
+							required
+						>
+							<option value="">Selecione uma área</option>
+							<option value="front-end">Front-end</option>
+							<option value="back-end">Back-end</option>
+							<option value="full-stack">Full Stack</option>
+						</select>
+						<span id="area-error" class="field-error"></span>
+					</div>
+					<fieldset id="skills-group" class="field">
+						<h3>Habilidades</h3>
+						<p id="skills-help">
+							Selecione pelo menos uma habilidade que você possui.
+						</p>
+						<div id="skills-options" class="skills-options">
+							<label for="skill-html"
+								><input
+									id="skill-html"
+									type="checkbox"
+									name="skills"
+									value="html"
+									class="skill-checkbox"
+								/>HTML</label
+							>
+							<label for="skill-css"
+								><input
+									id="skill-css"
+									type="checkbox"
+									name="skills"
+									value="css"
+									class="skill-checkbox"
+								/>CSS</label
+							>
+							<label for="skill-javascript"
+								><input
+									id="skill-javascript"
+									type="checkbox"
+									name="skills"
+									value="javascript"
+									class="skill-checkbox"
+								/>JavaScript</label
+							>
+							<label for="skill-typescript"
+								><input
+									id="skill-typescript"
+									type="checkbox"
+									name="skills"
+									value="typescript"
+									class="skill-checkbox"
+								/>TypeScript</label
+							>
+							<label for="skill-java"
+								><input
+									id="skill-java"
+									type="checkbox"
+									name="skills"
+									value="java"
+									class="skill-checkbox"
+								/>Java</label
+							>
+							<label for="skill-python"
+								><input
+									id="skill-python"
+									type="checkbox"
+									name="skills"
+									value="python"
+									class="skill-checkbox"
+								/>Python</label
+							>
+							<label for="skill-tailwind"
+								><input
+									id="skill-tailwind"
+									type="checkbox"
+									name="skills"
+									value="tailwind"
+									class="skill-checkbox"
+								/>Tailwind</label
+							>
+							<label for="skill-vue"
+								><input
+									id="skill-vue"
+									type="checkbox"
+									name="skills"
+									value="vue"
+									class="skill-checkbox"
+								/>Vue.js</label
+							>
+							<label for="skill-nodejs"
+								><input
+									id="skill-nodejs"
+									type="checkbox"
+									name="skills"
+									value="nodejs"
+									class="skill-checkbox"
+								/>Node.js</label
+							>
+							<label for="skill-nextjs"
+								><input
+									id="skill-nextjs"
+									type="checkbox"
+									name="skills"
+									value="nextjs"
+									class="skill-checkbox"
+								/>Next.js</label
+							>
+							<label for="skill-php"
+								><input
+									id="skill-php"
+									type="checkbox"
+									name="skills"
+									value="php"
+									class="skill-checkbox"
+								/>PHP</label
+							>
+							<label for="skill-c-sharp"
+								><input
+									id="skill-c-sharp"
+									type="checkbox"
+									name="skills"
+									value="c-sharp"
+									class="skill-checkbox"
+								/>C#</label
+							>
+							<label for="skill-rest-api"
+								><input
+									id="skill-rest-api"
+									type="checkbox"
+									name="skills"
+									value="rest-api"
+									class="skill-checkbox"
+								/>APIs REST</label
+							>
+						</div>
+						<p id="skill-experience-guidance" class="skill-experience-guidance">
+							Sem experiência profissional? Digite 0. Limite: 50 anos por tecnologia.
+						</p>
+						<div
+							id="skill-experience-fields"
+							class="skill-experience-fields"
+						></div>
+						<span id="skills-error" class="field-error"></span>
+					</fieldset>
+					<div class="actions">
+						<button id="analyse-button" type="submit" disabled>
+							Analisar compatibilidade
+						</button>
+					</div>
+				</form>
+			</section>
+			<p id="page-status"></p>
+			<p id="storage-notice"></p>
+			<button id="retry-button" type="button">
+				Tentar carregar novamente
+			</button>
+			<section id="results-section">
+				<h2 id="results-title">Sua análise</h2>
+				<div class="candidate-summary">
+					<h3>Perfil analisado</h3>
+					<p id="profile-summary"></p>
+					<p id="match-summary"></p>
+					<p id="session-count"></p>
+				</div>
+				<div id="study-recommendation"></div>
+				<div id="job-list" class="job-list"></div>
+			</section>
+		</main>
+		<footer class="site-footer page-container">
+			<p>SCTEC - 2026</p>
+		</footer>
+		<script type="module" src="./assets/scripts/main.js"></script>
+	</body>
+</html>
