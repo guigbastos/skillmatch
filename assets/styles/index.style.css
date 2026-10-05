@@ -125,7 +125,7 @@ fieldset.field {
 .skill-checkbox {
 	width: 18px;
 	height: 18px;
-	accent-color: #0a9853;
+	accent-color: #087a43;
 }
 
 .form-control {
@@ -140,10 +140,10 @@ fieldset.field {
 
 button {
 	padding: 12px 16px;
-	border: 1px solid #0a9853;
+	border: 1px solid #087a43;
 	border-radius: 8px;
 	color: #ffffff;
-	background: #0a9853;
+	background: #087a43;
 	cursor: pointer;
 }
 
@@ -267,14 +267,14 @@ button:disabled {
 }
 
 .job-card-best {
-	border: 2px solid #0a9853;
+	border: 2px solid #087a43;
 }
 
 .job-card-badge {
 	display: inline-block;
 	padding: 4px 8px;
 	border-radius: 8px;
-	color: #0a9853;
+	color: #087a43;
 	background: #e7f4eb;
 	font-weight: 700;
 }
@@ -304,7 +304,7 @@ button:disabled {
 	margin: 0 8px 8px 0;
 	padding: 4px 8px;
 	border-radius: 8px;
-	color: #0a9853;
+	color: #087a43;
 	background-color: #e7f4eb;
 	font-size: 12px;
 	line-height: 16px;
